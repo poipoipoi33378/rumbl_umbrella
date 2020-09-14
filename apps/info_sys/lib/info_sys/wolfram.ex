@@ -33,7 +33,7 @@ defmodule InfoSys.Wolfram do
 
   defp url(input) do
     "#{@base}?" <>
-    URI.encode_query(appid: id(), input: input, format: "plaintext")
+      URI.encode_query(appid: id(), input: input, format: "plaintext")
   end
 
   defp id, do: Application.fetch_env!(:info_sys, :wolfram)[:app_id]

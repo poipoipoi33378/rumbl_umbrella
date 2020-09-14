@@ -41,4 +41,3 @@ config :info_sys, :wolfram, app_id: wolfram_app_id
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
-

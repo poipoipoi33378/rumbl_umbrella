@@ -47,7 +47,8 @@ defmodule RumblWeb.MixProject do
       {:gettext, "~> 0.11"},
       {:rumbl, in_umbrella: true},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:inifo_sysy, in_umbrella: true}
     ]
   end
 
