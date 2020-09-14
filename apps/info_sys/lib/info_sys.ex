@@ -1,5 +1,5 @@
 defmodule InfoSys do
-  @backends [InfoSys.Wolframe]
+  @backends [InfoSys.Wolfram]
 
   defmodule Result do
     defstruct score: 0, text: nil, backend: nil
