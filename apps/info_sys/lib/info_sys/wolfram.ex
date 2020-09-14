@@ -1,18 +1,21 @@
-defmodule InfoSys.WolFram do
+defmodule InfoSys.Wolfram do
   import SweetXml
   alias InfoSys.Result
 
   @behaviour InfoSys.Backend
 
-  @base "https://api.wolframalpha.com/v2/query"
+  @base "http://api.wolframalpha.com/v2/query"
+
+  @impl true
+  def name, do: "wolfram"
 
   @impl true
   def compute(query_str, _opts) do
     query_str
     |> fetch_xml()
     |> xpath(~x"/queryresult/pod[contains(@title, 'Result') or
-                                  contains(@title, 'Definitions')]
-                              /subpod/plaintext/text()")
+                                 contains(@title, 'Definitions')]
+                            /subpod/plaintext/text()")
     |> build_results()
   end
 
@@ -29,9 +32,9 @@ defmodule InfoSys.WolFram do
   end
 
   defp url(input) do
-    "#{@base}" <>
-    URI.encode_query(appid: id(),input: input, format: "plaintext")
+    "#{@base}?" <>
+    URI.encode_query(appid: id(), input: input, format: "plaintext")
   end
 
-  defp id, do: Application.fetch_env!(:info_sysy, :walfram)[:app_id]
+  defp id, do: Application.fetch_env!(:info_sys, :wolfram)[:app_id]
 end
