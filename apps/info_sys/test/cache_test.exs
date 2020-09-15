@@ -16,7 +16,7 @@ defmodule InfoSysTest.CacheTest do
     assert Cache.fetch(name, :key2) == {:ok, :value2}
   end
 
-  test "unfound entry returns error" ,%{name: name} do
+  test "unfound entry returns error", %{name: name} do
     assert Cache.fetch(name, :notexists) == :error
   end
 
@@ -33,7 +33,6 @@ defmodule InfoSysTest.CacheTest do
     {:ok, _cache} = Cache.start_link(name: name)
     Cache.fetch(name, :value1) == :error
   end
-
 
   defp assert_shutdown(pid) do
     ref = Process.monitor(pid)
