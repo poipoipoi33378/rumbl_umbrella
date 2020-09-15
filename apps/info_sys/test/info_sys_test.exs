@@ -14,7 +14,7 @@ defmodule InfoSysTest do
     end
 
     def compute("timeout", _opts) do
-      Process.sleep(:ifinity)
+      Process.sleep(:infinity)
     end
 
     def compute("boom", _opts) do
