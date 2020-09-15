@@ -21,4 +21,23 @@ defmodule RumblWeb.Channels.VidoChannelTest do
     assert socket.assigns.video_id == vid.id
     assert %{annotations: [%{body: "one"}, %{body: "two"}]} = reply
   end
+
+  test "inserting new annotations", %{socket: socket, video: vid} do
+    {:ok, _, socket} = subscribe_and_join(socket, "videos:#{vid.id}", %{})
+    ref = push socket, "new_annotation", %{body: "the body", at: 0}
+    assert_reply ref, :ok, %{}
+    assert_broadcast "new_annotation", %{}
+  end
+
+  test "new annotations triggers InfoSys", %{socket: socket, video: vid} do
+    insert_user(
+      username: "wolfram",
+      password: "super_secret"
+    )
+
+    {:ok, _, socket} = subscribe_and_join(socket, "videos:#{vid.id}", %{})
+    ref = push socket, "new_annotation", %{body: "1 + 1", at: 123}
+    assert_reply ref, :ok, %{}
+    assert_broadcast "new_annotation", %{body: "1 + 1", at: 123}
+  end
 end
