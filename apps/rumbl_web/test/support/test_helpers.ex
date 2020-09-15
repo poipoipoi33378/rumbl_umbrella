@@ -34,5 +34,6 @@ defmodule RumblWeb.TestHelpers do
     user = insert_user(username: username)
     {Plug.Conn.assign(conn, :current_user, user), user}
   end
+
   def login(%{conn: conn}), do: {conn, :logged_out}
 end

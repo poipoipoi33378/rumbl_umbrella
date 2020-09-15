@@ -15,6 +15,7 @@ defmodule RumblWeb.Channels.VidoChannelTest do
     for body <- ~w(one two) do
       Rumbl.Multimedia.annotate_video(user, vid.id, %{body: body, at: 0})
     end
+
     {:ok, reply, socket} = subscribe_and_join(socket, "videos:#{vid.id}", %{})
 
     assert socket.assigns.video_id == vid.id
